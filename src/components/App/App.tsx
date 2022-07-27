@@ -4,6 +4,7 @@ import { useTypedSelector } from "../../hooks/useTypedSelector";
 import { useActions } from "../../hooks/useActios";
 import { useEffect } from "react";
 import "./App.scss";
+import Pagination from "../Pagination/Pagination";
 
 const App: React.FC = () => {
     const data = useTypedSelector((state) => state.data);
@@ -56,6 +57,7 @@ const App: React.FC = () => {
         <div className="app">
             <div className="container">
                 <Table {...posts} />
+                <Pagination />
             </div>
         </div>
     );
