@@ -60,3 +60,7 @@ export interface IPaginateProps {
     currentPage: number;
     maxPage: number;
 }
+
+export interface IConfirmProps {
+    message: string;
+}

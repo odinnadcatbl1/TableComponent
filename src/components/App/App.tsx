@@ -6,6 +6,7 @@ import usePagination from "../../hooks/usePagination";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 import { useActions } from "../../hooks/useActios";
 import React, { useEffect } from "react";
+import Confirm from "../Confirm/Confirm";
 
 import "./App.scss";
 
@@ -71,6 +72,7 @@ const App: React.FC = () => {
                     currentData={currentData()}
                     maxPage={maxPage}
                 />
+                <Confirm message={"message"} />
             </div>
         </div>
     );
