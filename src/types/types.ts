@@ -62,5 +62,6 @@ export interface IPaginateProps {
 }
 
 export interface IConfirmProps {
+    onConfirm: (choose: boolean) => void;
     message: string;
 }

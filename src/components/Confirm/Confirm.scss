@@ -4,7 +4,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.7);
 }
 
 .confirm__inner {
@@ -22,8 +22,10 @@
 }
 
 .confirm__message {
+    text-align: center;
     padding: 5px;
     font-size: 14px;
+    font-weight: 600;
 }
 
 .confirm__actions {
