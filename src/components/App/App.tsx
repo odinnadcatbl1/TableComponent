@@ -1,10 +1,13 @@
 import { ITableData } from "../../types/types";
 import Table from "../Table/Table";
+import Pagination from "../Pagination/Pagination";
+
+import usePagination from "../../hooks/usePagination";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 import { useActions } from "../../hooks/useActios";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
+
 import "./App.scss";
-import Pagination from "../Pagination/Pagination";
 
 const App: React.FC = () => {
     const data = useTypedSelector((state) => state.data);
@@ -13,6 +16,9 @@ const App: React.FC = () => {
     useEffect(() => {
         fetchPosts();
     }, []);
+
+    const { prev, next, jump, maxPage, currentData, currentPage } =
+        usePagination(data.data, 10);
 
     if (data.loading) {
         return <div className="loading__info">Загрузка....</div>;
@@ -49,7 +55,7 @@ const App: React.FC = () => {
                     name: "body",
                 },
             ],
-            data: data.data,
+            data: currentData(),
         },
     };
 
@@ -57,7 +63,14 @@ const App: React.FC = () => {
         <div className="app">
             <div className="container">
                 <Table {...posts} />
-                <Pagination />
+                <Pagination
+                    prev={prev}
+                    next={next}
+                    jump={jump}
+                    currentPage={currentPage}
+                    currentData={currentData()}
+                    maxPage={maxPage}
+                />
             </div>
         </div>
     );

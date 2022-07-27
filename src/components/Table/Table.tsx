@@ -2,11 +2,9 @@ import { ITableData } from "../../types/types";
 import { useActions } from "../../hooks/useActios";
 
 import "./Table.scss";
-import React from "react";
 
 const Table: React.FC<ITableData> = (props) => {
     const { deleteRow } = useActions();
-
     const { id, data } = props;
 
     return (

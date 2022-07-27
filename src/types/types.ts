@@ -10,13 +10,11 @@ export interface ITableData {
         data: any[];
     };
 }
-
 export interface DataState {
     data: any[];
     loading: boolean;
     error: any;
 }
-
 export interface FilterState {
     search: string;
     sort: string;
@@ -53,3 +51,12 @@ export type DataAction =
     | SuccessFetchAction
     | FailureFetchAction
     | DeleteRow;
+
+export interface IPaginateProps {
+    currentData: any[];
+    next: () => void;
+    prev: () => void;
+    jump: (page: number) => void;
+    currentPage: number;
+    maxPage: number;
+}
