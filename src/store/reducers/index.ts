@@ -1,24 +1,24 @@
 export enum DataActionTypes {
-    FETCH_POSTS_SUCCESS = "FETCH_POSTS_SUCCESS",
-    FETCH_POSTS_FAILURE = "FETCH_POSTS_FAILURE",
-    FETCH_POSTS_REQUEST = "FETCH_POSTS_REQUEST",
+    FETCH_DATA_SUCCESS = "FETCH_DATA_SUCCESS",
+    FETCH_DATA_FAILURE = "FETCH_DATA_FAILURE",
+    FETCH_DATA_REQUEST = "FETCH_DATA_REQUEST",
 }
 
 interface RequestFetchAction {
-    type: DataActionTypes.FETCH_POSTS_REQUEST;
+    type: DataActionTypes.FETCH_DATA_REQUEST;
 }
 
 interface SuccessFetchAction {
-    type: DataActionTypes.FETCH_POSTS_SUCCESS;
+    type: DataActionTypes.FETCH_DATA_SUCCESS;
     payload: [];
 }
 
 interface FailureFetchAction {
-    type: DataActionTypes.FETCH_POSTS_FAILURE;
+    type: DataActionTypes.FETCH_DATA_FAILURE;
     payload: any;
 }
 
-export type PostsAction =
+export type DataAction =
     | RequestFetchAction
     | SuccessFetchAction
     | FailureFetchAction;
@@ -33,22 +33,22 @@ const initialState = [
     },
 ];
 
-export const reducer = (state = initialState, action: PostsAction) => {
+export const reducer = (state = initialState, action: DataAction) => {
     switch (action.type) {
-        case "FETCH_POSTS_SUCCESS":
+        case DataActionTypes.FETCH_DATA_SUCCESS:
             return {
                 ...state,
                 data: action.payload,
                 loading: false,
             };
 
-        case "FETCH_POSTS_REQUEST":
+        case DataActionTypes.FETCH_DATA_REQUEST:
             return {
                 ...state,
                 data: [],
             };
 
-        case "FETCH_POSTS_FAILURE":
+        case DataActionTypes.FETCH_DATA_FAILURE:
             return {
                 ...state,
                 data: [],

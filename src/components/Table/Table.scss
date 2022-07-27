@@ -1,0 +1,19 @@
+.table__row {
+    display: flex;
+    flex-flow: row wrap;
+
+    &--header {
+        .table__cell {
+            background-color: grey;
+            color: white;
+            font-weight: 700;
+        }
+    }
+}
+
+.table__cell {
+    text-align: center;
+    padding: 0.5em 0.5em;
+    border: 1px solid black;
+    font-size: 12px;
+}
