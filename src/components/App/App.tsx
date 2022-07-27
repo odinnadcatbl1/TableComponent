@@ -1,38 +1,49 @@
 import { ITableData } from "../../types/types";
 import Table from "../Table/Table";
+import { useTypedSelector } from "../../hooks/useTypedSelector";
+import { useActions } from "../../hooks/useActios";
+import { useEffect } from "react";
 import "./App.scss";
 
-const initialData: ITableData = {
-    id: "example",
-    data: {
-        name: "name",
-        description: "description",
-        structure: [
-            {
-                id: "1",
-                name: "ID",
-            },
-            {
-                id: "2",
-                name: "Название столбца 1",
-            },
-            {
-                id: "3",
-                name: "Название столбца 2",
-            },
-        ],
-        data: [
-            { id: "21321", name: "название значения 1", body: "значение 1" },
-            { id: "2421", name: "название значения 2", body: "значение 2" },
-        ],
-    },
-};
-
 const App: React.FC = () => {
+    const data = useTypedSelector((state) => state.data);
+    const { fetchPosts } = useActions();
+
+    useEffect(() => {
+        fetchPosts();
+    }, []);
+
+    const posts: ITableData = {
+        id: "json-placeholder",
+        data: {
+            name: "Json placeholder posts",
+            description: "Json placeholder posts",
+            structure: [
+                {
+                    id: "userID",
+                    name: "userID",
+                },
+                {
+                    id: "ID",
+                    name: "ID",
+                },
+                {
+                    id: "title",
+                    name: "title",
+                },
+                {
+                    id: "body",
+                    name: "body",
+                },
+            ],
+            data: data.data,
+        },
+    };
+
     return (
         <div className="app">
             <div className="container">
-                <Table {...initialData} />
+                <Table {...posts} />
             </div>
         </div>
     );

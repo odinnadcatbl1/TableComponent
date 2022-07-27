@@ -1,20 +1,18 @@
 import { ITableData } from "../../types/types";
+
 import "./Table.scss";
 
 const Table: React.FC<ITableData> = (props) => {
     const { id, data } = props;
 
-    const tableName = data.name;
-    const tableDescription = data.description;
-
     return (
-        <div className="table">
+        <div className="table" key={id}>
             <div className="table__title">
-                <h2>{tableName}</h2>
+                <h2>{data.name}</h2>
             </div>
 
             <div className="table__description">
-                <p>{tableDescription}</p>
+                <p>{data.description}</p>
             </div>
 
             <div className="table__row table__row--header">
