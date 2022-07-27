@@ -13,6 +13,18 @@ const App: React.FC = () => {
         fetchPosts();
     }, []);
 
+    if (data.loading) {
+        return <div className="loading__info">Загрузка....</div>;
+    }
+
+    if (data.error) {
+        return (
+            <div className="error__info">
+                Ошибка получения данных.. Проверьте подключение к интернету
+            </div>
+        );
+    }
+
     const posts: ITableData = {
         id: "json-placeholder",
         data: {
