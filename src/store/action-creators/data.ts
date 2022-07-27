@@ -22,3 +22,10 @@ export const fetchPosts = () => {
         }
     };
 };
+
+export const deleteRow = (id: number) => {
+    return {
+        type: DataActionTypes.DELETE_ROW,
+        payload: id,
+    };
+};

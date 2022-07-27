@@ -12,7 +12,7 @@ export interface ITableData {
 }
 
 export interface DataState {
-    data: [];
+    data: any[];
     loading: boolean;
     error: any;
 }
@@ -26,6 +26,7 @@ export enum DataActionTypes {
     FETCH_DATA_SUCCESS = "FETCH_DATA_SUCCESS",
     FETCH_DATA_FAILURE = "FETCH_DATA_FAILURE",
     FETCH_DATA_REQUEST = "FETCH_DATA_REQUEST",
+    DELETE_ROW = "DELETE_ROW",
 }
 
 interface RequestFetchAction {
@@ -42,7 +43,13 @@ interface FailureFetchAction {
     payload: any;
 }
 
+interface DeleteRow {
+    type: DataActionTypes.DELETE_ROW;
+    payload: number;
+}
+
 export type DataAction =
     | RequestFetchAction
     | SuccessFetchAction
-    | FailureFetchAction;
+    | FailureFetchAction
+    | DeleteRow;

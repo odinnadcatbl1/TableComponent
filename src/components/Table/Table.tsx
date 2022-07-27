@@ -1,8 +1,12 @@
 import { ITableData } from "../../types/types";
+import { useActions } from "../../hooks/useActios";
 
 import "./Table.scss";
+import React from "react";
 
 const Table: React.FC<ITableData> = (props) => {
+    const { deleteRow } = useActions();
+
     const { id, data } = props;
 
     return (
@@ -47,7 +51,12 @@ const Table: React.FC<ITableData> = (props) => {
                             );
                         })}
 
-                        <div className="table__cell table__cell--delete">
+                        <div
+                            className="table__cell table__cell--delete"
+                            onClick={() => {
+                                deleteRow(item.id);
+                            }}
+                        >
                             DELETE
                         </div>
                     </div>

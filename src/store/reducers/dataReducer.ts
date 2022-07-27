@@ -29,6 +29,17 @@ export const dataReducer = (state = initialState, action: DataAction) => {
                 error: action.payload,
             };
 
+        case DataActionTypes.DELETE_ROW:
+            const newData = state.data.filter((row) => {
+                if (row.id !== action.payload) {
+                    return true;
+                }
+            });
+            return {
+                ...state,
+                data: newData,
+            };
+
         default:
             return state;
     }
