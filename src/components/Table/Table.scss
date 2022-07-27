@@ -1,6 +1,7 @@
 .table__row {
     display: flex;
     flex-flow: row wrap;
+    position: relative;
 
     &--header {
         .table__cell {
@@ -19,4 +20,22 @@
     display: flex;
     align-items: center;
     justify-content: center;
+
+    &--delete {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: -70px;
+        background-color: red;
+        color: white;
+        font-weight: 700;
+        border-radius: 10px;
+        padding: 7px;
+        transition: opacity 0.2s ease;
+        cursor: pointer;
+
+        &:hover {
+            opacity: 0.7;
+        }
+    }
 }

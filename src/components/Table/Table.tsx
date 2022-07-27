@@ -46,6 +46,10 @@ const Table: React.FC<ITableData> = (props) => {
                                 </div>
                             );
                         })}
+
+                        <div className="table__cell table__cell--delete">
+                            DELETE
+                        </div>
                     </div>
                 );
             })}
