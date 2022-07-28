@@ -68,4 +68,5 @@ export interface IConfirmProps {
 
 export interface ISearchProps {
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    value: string;
 }

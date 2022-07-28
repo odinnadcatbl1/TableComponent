@@ -33,11 +33,11 @@ const App: React.FC = () => {
             description: "Json placeholder posts",
             structure: [
                 {
-                    id: "userID",
+                    id: "userId",
                     name: "userID",
                 },
                 {
-                    id: "ID",
+                    id: "id",
                     name: "ID",
                 },
                 {
