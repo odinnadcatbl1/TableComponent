@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/TableComponent/build/static/css/main.1518e372.css",
+    "main.js": "/TableComponent/build/static/js/main.502d16ae.js",
+    "index.html": "/TableComponent/build/index.html",
+    "main.1518e372.css.map": "/TableComponent/build/static/css/main.1518e372.css.map",
+    "main.502d16ae.js.map": "/TableComponent/build/static/js/main.502d16ae.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.1518e372.css",
+    "static/js/main.502d16ae.js"
+  ]
+}
