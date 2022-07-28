@@ -1,27 +1,33 @@
 import { ITableData } from "../../types/types";
 import { useActions } from "../../hooks/useActios";
 import usePagination from "../../hooks/usePagination";
-import "./Table.scss";
 import Confirm from "../Confirm/Confirm";
 import Pagination from "../Pagination/Pagination";
 import React, { useEffect, useState } from "react";
 import SearchForm from "../SearchForm/SearchForm";
+import sortByField from "../../utils/sortByField";
 
+import "./Table.scss";
 const Table: React.FC<ITableData> = (props) => {
     const { id, data } = props;
 
     const [searchWord, setSearchWord] = useState("");
-    const [sortValue, setSortValue] = useState("");
-
-    const filteredData = data.data.filter((item) => {
-        let flag = false;
-        Object.keys(item).forEach((key) => {
-            if (item[key].toString().includes(searchWord)) {
-                flag = true;
-            }
-        });
-        return flag;
+    const [sortValue, setSortValue] = useState({
+        sortBy: "",
+        direction: true,
     });
+
+    const filteredData = data.data
+        .filter((item) => {
+            let flag = false;
+            Object.keys(item).forEach((key) => {
+                if (item[key].toString().includes(searchWord)) {
+                    flag = true;
+                }
+            });
+            return flag;
+        })
+        .sort(sortByField(sortValue.sortBy, sortValue.direction));
 
     const [tableData, setTableData] = useState(filteredData);
     const { prev, next, jump, maxPage, currentData, currentPage } =
@@ -46,6 +52,10 @@ const Table: React.FC<ITableData> = (props) => {
     const onSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSearchWord(e.target.value);
     };
+
+    // const onSorted = (e: React.MouseEventHandler) => {
+    //     e.target;
+    // };
 
     useEffect(() => {
         setTableData(filteredData);
@@ -88,6 +98,12 @@ const Table: React.FC<ITableData> = (props) => {
                                 style={{
                                     width: `calc(100%/${data.structure.length})`,
                                 }}
+                                onClick={() =>
+                                    setSortValue({
+                                        sortBy: structure.id,
+                                        direction: !sortValue.direction,
+                                    })
+                                }
                             >
                                 {structure.name}
                             </div>
