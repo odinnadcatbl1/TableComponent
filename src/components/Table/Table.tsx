@@ -45,29 +45,20 @@ const Table: React.FC<ITableData> = (props) => {
     };
 
     const onSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+        jump(1);
         setSearchWord(e.target.value);
         setFilteredData(searchFilter(data.data, e.target.value));
-        jump(1);
     };
-
-    // const onConfirm = (choose: boolean) => {
-    //     if (choose) {
-    //         deleteRow(clickedRowId);
-    //         setConfirm({
-    //             message: "Вы уверены, что хотите удалить эту запись?",
-    //             isVisible: false,
-    //         });
-    //     } else {
-    //         setConfirm({
-    //             message: "",
-    //             isVisible: false,
-    //         });
-    //     }
-    // };
 
     useEffect(() => {
         setFilteredData(searchFilter(data.data, searchWord));
     }, [data.data]);
+
+    useEffect(() => {
+        if (currentPage === 0) {
+            jump(1);
+        }
+    }, [searchWord]);
 
     const tableData = isFirstPage
         ? currentData()
