@@ -41,7 +41,6 @@ const Table: React.FC<ITableData> = (props) => {
     };
 
     const onSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-        jump(1);
         setSearchWord(e.target.value);
     };
 
@@ -59,10 +58,6 @@ const Table: React.FC<ITableData> = (props) => {
             });
         }
     };
-
-    useEffect(() => {
-        jump(1);
-    }, [data, searchWord, sortValue]);
 
     return (
         <div className="table__wrapper">

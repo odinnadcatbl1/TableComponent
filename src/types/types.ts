@@ -13,7 +13,7 @@ export interface ITableData {
 export interface DataState {
     data: any[];
     loading: boolean;
-    error: any;
+    error: string;
 }
 export interface FilterState {
     search: string;

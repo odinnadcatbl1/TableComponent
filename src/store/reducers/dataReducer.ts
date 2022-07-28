@@ -4,7 +4,7 @@ import { DataAction, DataActionTypes } from "../../types/types";
 const initialState: DataState = {
     data: [],
     loading: true,
-    error: null,
+    error: "",
 };
 
 export const dataReducer = (state = initialState, action: DataAction) => {

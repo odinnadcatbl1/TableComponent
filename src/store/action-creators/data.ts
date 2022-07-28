@@ -17,7 +17,7 @@ export const fetchPosts = () => {
         } catch (e) {
             dispatch({
                 type: DataActionTypes.FETCH_DATA_FAILURE,
-                payload: e,
+                payload: "Не удалось загрузить данные",
             });
         }
     };
