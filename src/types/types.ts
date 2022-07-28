@@ -65,3 +65,7 @@ export interface IConfirmProps {
     onConfirm: (choose: boolean) => void;
     message: string;
 }
+
+export interface ISearchProps {
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}

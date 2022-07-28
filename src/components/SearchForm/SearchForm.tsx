@@ -1,6 +1,8 @@
+import { ISearchProps } from "../../types/types";
+
 import "./SearchForm.scss";
 
-const SearchForm: React.FC = () => {
+const SearchForm: React.FC<ISearchProps> = ({ onChange }) => {
     return (
         <div className="search__form-wrapper">
             <form className="search__form">
@@ -8,6 +10,7 @@ const SearchForm: React.FC = () => {
                     type="text"
                     className="search__form-input"
                     placeholder="Поиск.."
+                    onChange={onChange}
                 />
             </form>
         </div>
