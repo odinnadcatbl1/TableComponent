@@ -2,6 +2,7 @@
     display: flex;
     flex-flow: row wrap;
     position: relative;
+    padding-right: 70px;
 
     &--header {
         .table__cell {
@@ -32,7 +33,7 @@
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
-        right: -70px;
+        right: 0;
         background-color: red;
         color: white;
         font-weight: 700;
