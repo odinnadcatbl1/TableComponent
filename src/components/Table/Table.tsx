@@ -3,7 +3,7 @@ import { useActions } from "../../hooks/useActios";
 import usePagination from "../../hooks/usePagination";
 import Confirm from "../Confirm/Confirm";
 import Pagination from "../Pagination/Pagination";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import SearchForm from "../SearchForm/SearchForm";
 import sortByField from "../../utils/sortByField";
 import searchFilter from "../../utils/searchFilter";
@@ -16,32 +16,47 @@ const Table: React.FC<ITableData> = (props) => {
     const [searchWord, setSearchWord] = useState("");
     const [sortValue, setSortValue] = useState({
         sortBy: "",
-        direction: true,
+        direction: false,
     });
+
     const [clickedRowId, setClickedRowId] = useState(0);
     const [confirm, setConfirm] = useState({
         message: "",
         isVisible: false,
     });
 
-    const filteredData = searchFilter(data.data, searchWord).sort(
-        sortByField(sortValue.sortBy, sortValue.direction)
-    );
+    const [filteredData, setFilteredData] = useState(data.data);
+
     const { prev, next, jump, maxPage, currentData, currentPage } =
         usePagination(filteredData, 10);
+    const isFirstPage = currentPage === 1;
 
     const handleDelete = (id: number) => {
         setConfirm({
             message: "Вы уверены, что хотите удалить эту запись?",
             isVisible: true,
         });
-
         setClickedRowId(id);
-        console.log(clickedRowId);
+    };
+
+    const onSortValueChange = (structureId: string) => {
+        setSortValue({
+            sortBy: structureId,
+            direction: !sortValue.direction,
+        });
+        if (isFirstPage) {
+            setFilteredData(
+                [...filteredData].sort(
+                    sortByField(structureId, !sortValue.direction)
+                )
+            );
+        }
     };
 
     const onSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSearchWord(e.target.value);
+        setFilteredData(searchFilter(data.data, e.target.value));
+        jump(1);
     };
 
     const onConfirm = (choose: boolean) => {
@@ -58,6 +73,16 @@ const Table: React.FC<ITableData> = (props) => {
             });
         }
     };
+
+    useEffect(() => {
+        setFilteredData(searchFilter(data.data, searchWord));
+    }, [data.data]);
+
+    const tableData = isFirstPage
+        ? currentData()
+        : currentData().sort(
+              sortByField(sortValue.sortBy, sortValue.direction)
+          );
 
     return (
         <div className="table__wrapper">
@@ -80,21 +105,16 @@ const Table: React.FC<ITableData> = (props) => {
                             style={{
                                 width: `calc(100%/${data.structure.length})`,
                             }}
-                            onClick={() =>
-                                setSortValue({
-                                    sortBy: structure.id,
-                                    direction: !sortValue.direction,
-                                })
-                            }
+                            onClick={() => onSortValueChange(structure.id)}
                         >
                             {structure.name}
                         </div>
                     ))}
                 </div>
-                {!currentData().length && (
+                {!tableData.length && (
                     <div className="table__row">Ничего не найдено!</div>
                 )}
-                {currentData().map((item) => (
+                {tableData.map((item) => (
                     <div className="table__row" key={item.id}>
                         {Object.keys(item).map((cell) => (
                             <div
