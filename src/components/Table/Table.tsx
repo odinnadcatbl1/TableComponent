@@ -4,6 +4,7 @@ import { useActions } from "../../hooks/useActios";
 import "./Table.scss";
 import Confirm from "../Confirm/Confirm";
 import { useState } from "react";
+import SearchForm from "../SearchForm/SearchForm";
 
 const Table: React.FC<ITableData> = (props) => {
     const { deleteRow } = useActions();
@@ -48,6 +49,8 @@ const Table: React.FC<ITableData> = (props) => {
             <div className="table__description">
                 <p>{data.description}</p>
             </div>
+
+            <SearchForm />
 
             <div className="table__row table__row--header">
                 {data.structure.map((structure) => {
