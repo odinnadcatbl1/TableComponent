@@ -2,7 +2,7 @@
     display: flex;
     flex-flow: row wrap;
     position: relative;
-    padding-right: 70px;
+    padding-right: 90px;
 
     &--header {
         .table__cell {
@@ -28,23 +28,45 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
 
-    &--delete {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        right: 0;
+.confirm__actions {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: -20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.confirm__button {
+    padding: 5px 7px;
+    margin: 5px 0;
+    font-size: 12px;
+    border: none;
+    background: none;
+    border-radius: 5px;
+    transition: opacity 0.2s ease;
+    cursor: pointer;
+    font-weight: 700;
+    color: white;
+
+    &:hover {
+        opacity: 0.7;
+    }
+
+    &--del {
+        background-color: lightcoral;
+        margin-right: 15px;
+    }
+
+    &--yes {
         background-color: red;
-        color: white;
-        font-weight: 700;
-        border: none;
-        border-radius: 10px;
-        padding: 7px;
-        transition: opacity 0.2s ease;
-        cursor: pointer;
+    }
 
-        &:hover {
-            opacity: 0.7;
-        }
+    &--no {
+        background-color: lightgreen;
     }
 }

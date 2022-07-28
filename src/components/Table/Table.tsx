@@ -1,7 +1,6 @@
 import { ITableData } from "../../types/types";
 import { useActions } from "../../hooks/useActios";
 import usePagination from "../../hooks/usePagination";
-import Confirm from "../Confirm/Confirm";
 import Pagination from "../Pagination/Pagination";
 import React, { useEffect, useMemo, useState } from "react";
 import SearchForm from "../SearchForm/SearchForm";
@@ -20,10 +19,6 @@ const Table: React.FC<ITableData> = (props) => {
     });
 
     const [clickedRowId, setClickedRowId] = useState(0);
-    const [confirm, setConfirm] = useState({
-        message: "",
-        isVisible: false,
-    });
 
     const [filteredData, setFilteredData] = useState(data.data);
 
@@ -31,11 +26,7 @@ const Table: React.FC<ITableData> = (props) => {
         usePagination(filteredData, 10);
     const isFirstPage = currentPage === 1;
 
-    const handleDelete = (id: number) => {
-        setConfirm({
-            message: "Вы уверены, что хотите удалить эту запись?",
-            isVisible: true,
-        });
+    const onConfirm = (id: number) => {
         setClickedRowId(id);
     };
 
@@ -59,20 +50,20 @@ const Table: React.FC<ITableData> = (props) => {
         jump(1);
     };
 
-    const onConfirm = (choose: boolean) => {
-        if (choose) {
-            deleteRow(clickedRowId);
-            setConfirm({
-                message: "Вы уверены, что хотите удалить эту запись?",
-                isVisible: false,
-            });
-        } else {
-            setConfirm({
-                message: "",
-                isVisible: false,
-            });
-        }
-    };
+    // const onConfirm = (choose: boolean) => {
+    //     if (choose) {
+    //         deleteRow(clickedRowId);
+    //         setConfirm({
+    //             message: "Вы уверены, что хотите удалить эту запись?",
+    //             isVisible: false,
+    //         });
+    //     } else {
+    //         setConfirm({
+    //             message: "",
+    //             isVisible: false,
+    //         });
+    //     }
+    // };
 
     useEffect(() => {
         setFilteredData(searchFilter(data.data, searchWord));
@@ -128,17 +119,33 @@ const Table: React.FC<ITableData> = (props) => {
                             </div>
                         ))}
 
-                        <div
-                            className="table__cell table__cell--delete"
-                            onClick={() => handleDelete(item.id)}
-                        >
-                            DELETE
-                        </div>
+                        {clickedRowId === item.id ? (
+                            <div className="confirm__actions">
+                                <button
+                                    className="confirm__button confirm__button--no"
+                                    onClick={() => setClickedRowId(0)}
+                                >
+                                    Отменить
+                                </button>
+                                <button
+                                    className="confirm__button confirm__button--yes"
+                                    onClick={() => deleteRow(item.id)}
+                                >
+                                    Подтвердить
+                                </button>
+                            </div>
+                        ) : (
+                            <div className="confirm__actions">
+                                <button
+                                    className="confirm__button confirm__button--del"
+                                    onClick={() => onConfirm(item.id)}
+                                >
+                                    Удалить
+                                </button>
+                            </div>
+                        )}
                     </div>
                 ))}
-                {confirm.isVisible && (
-                    <Confirm onConfirm={onConfirm} message={confirm.message} />
-                )}
             </div>
             {filteredData.length > 10 && (
                 <Pagination
